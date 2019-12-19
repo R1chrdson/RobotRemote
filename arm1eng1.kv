@@ -1,0 +1,44 @@
+<Arm1Eng1>:
+    id: main
+    MyJoystick:
+        id: engine1
+        posX: .55
+        posY: .47
+        xText: 'Angle'
+        yText: 'Speed'
+        min: app.commands['ANGLE']['MIN']
+        max: app.commands['ANGLE']['MAX']
+        velocitymax: app.commands['ENGINE1']['VELOCITYMAX']
+
+    SliderNV:
+        id: gripper1
+        name: 'Gripper'
+        sliderX: .05
+        sliderY: .6
+        valueX: .45
+        min: app.commands['GRIPPER1']['MIN']
+        max: app.commands['GRIPPER1']['MAX']
+        val: app.commands['GRIPPER1']['VAL']
+        step: app.commands['GRIPPER1']['STEP']
+
+    SliderNV:
+        id: elbow1
+        name: 'Elbow'
+        sliderX: .05
+        sliderY: .4
+        valueX: .45
+        min: app.commands['ELBOW1']['MIN']
+        max: app.commands['ELBOW1']['MAX']
+        val: app.commands['ELBOW1']['VAL']
+        step: app.commands['ELBOW1']['STEP']
+
+    SliderNV:
+        id: shoulder1
+        name: 'Shoulder'
+        sliderX: .05
+        sliderY: .2
+        valueX: .45
+        min: app.commands['SHOULDER1']['MIN']
+        max: app.commands['SHOULDER1']['MAX']
+        val: app.commands['SHOULDER1']['VAL']
+        step: app.commands['SHOULDER1']['STEP']

@@ -1,0 +1,109 @@
+<Arm2Eng2>:
+    MyScroll:
+        id: arms
+        pos_hint: {'top': .8}
+        size_hint: (1, .8)
+        FloatLayout:
+            SliderNV:
+                id: gripper1
+                name: 'Left Gripper'
+                sliderX: .025
+                sliderY: .6
+                valueX: .3
+                sliderSizeX: .45
+                min: app.commands['GRIPPER1']['MIN']
+                max: app.commands['GRIPPER1']['MAX']
+                val: app.commands['GRIPPER1']['VAL']
+                step: app.commands['GRIPPER1']['STEP']
+
+            SliderNV:
+                id: elbow1
+                name: 'Left Elbow'
+                sliderX: .025
+                sliderY: .4
+                valueX: .3
+                sliderSizeX: .45
+                min: app.commands['ELBOW1']['MIN']
+                max: app.commands['ELBOW1']['MAX']
+                val: app.commands['ELBOW1']['VAL']
+                step: app.commands['ELBOW1']['STEP']
+
+            SliderNV:
+                id: shoulder1
+                name: 'Left Shoulder'
+                sliderX: .025
+                sliderY: .2
+                valueX: .3
+                sliderSizeX: .45
+                min: app.commands['SHOULDER1']['MIN']
+                max: app.commands['SHOULDER1']['MAX']
+                val: app.commands['SHOULDER1']['VAL']
+                step: app.commands['SHOULDER1']['STEP']
+
+            SliderNV:
+                id: gripper2
+                name: 'Right Gripper'
+                sliderX: .525
+                sliderY: .6
+                valueX: .93
+                sliderSizeX: .45
+                min: app.commands['GRIPPER2']['MIN']
+                max: app.commands['GRIPPER2']['MAX']
+                val: app.commands['GRIPPER2']['VAL']
+                step: app.commands['GRIPPER2']['STEP']
+
+            SliderNV:
+                id: elbow2
+                name: 'Right Elbow'
+                sliderX: .525
+                sliderY: .4
+                valueX: .93
+                sliderSizeX: .45
+                min: app.commands['ELBOW2']['MIN']
+                max: app.commands['ELBOW2']['MAX']
+                val: app.commands['ELBOW2']['VAL']
+                step: app.commands['ELBOW2']['STEP']
+
+            SliderNV:
+                id: shoulder2
+                name: 'Right Shoulder'
+                sliderX: .525
+                sliderY: .2
+                valueX: .93
+                sliderSizeX: .45
+                min: app.commands['SHOULDER2']['MIN']
+                max: app.commands['SHOULDER2']['MAX']
+                val: app.commands['SHOULDER2']['VAL']
+                step: app.commands['SHOULDER2']['STEP']
+
+    MyScroll:
+        id: engines
+        pos_hint: {'top': 2}
+        size_hint: (1, .8)
+        FloatLayout:
+            MyJoystick:
+                id: engine1
+                angle: False
+                posX: 0
+                posY: .47
+                yText: 'Left Speed'
+                velocitymax: app.commands['ENGINE1']['VELOCITYMAX']
+
+            MyJoystick:
+                id: engine2
+                angle: False
+                posX: .5
+                posY: .47
+                yText: 'Right Speed'
+                velocitymax: app.commands['ENGINE2']['VELOCITYMAX']
+
+    Choose:
+        id: elements
+        firstText: 'Arm'
+        secondText: 'Engine'
+        group: 'elements'
+        firstRefer: root.ids.arms
+        secondRefer: root.ids.engines
+        size_hint: (.5, .1)
+        pos_hint: {'center_x': .5, 'top': .75}
+        function: partial(root.changeElement)

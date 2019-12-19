@@ -1,0 +1,82 @@
+<Arm2Eng1>:
+    SliderNV:
+        id: gripper1
+        name: 'Left Gripper'
+        sliderX: 0
+        sliderY: .6
+        valueX: .3
+        sliderSizeX: .37
+        min: app.commands['GRIPPER1']['MIN']
+        max: app.commands['GRIPPER1']['MAX']
+        val: app.commands['GRIPPER1']['VAL']
+        step: app.commands['GRIPPER1']['STEP']
+
+    SliderNV:
+        id: elbow1
+        name: 'Left Elbow'
+        sliderX: 0
+        sliderY: .4
+        valueX: .3
+        sliderSizeX: .37
+        min: app.commands['ELBOW1']['MIN']
+        max: app.commands['ELBOW1']['MAX']
+        val: app.commands['ELBOW1']['VAL']
+        step: app.commands['ELBOW1']['STEP']
+
+    SliderNV:
+        id: shoulder1
+        name: 'Left Shoulder'
+        sliderX: 0
+        sliderY: .2
+        valueX: .3
+        sliderSizeX: .37
+        min: app.commands['SHOULDER1']['MIN']
+        max: app.commands['SHOULDER1']['MAX']
+        val: app.commands['SHOULDER1']['VAL']
+        step: app.commands['SHOULDER1']['STEP']
+
+    MyJoystick:
+        id: engine1
+        posX: .25
+        posY: .47
+        xText: 'Angle'
+        yText: 'Speed'
+        min: app.commands['ANGLE']['MIN']
+        max: app.commands['ANGLE']['MAX']
+        velocitymax: app.commands['ENGINE1']['VELOCITYMAX']
+    
+    SliderNV:
+        id: gripper2
+        name: 'Right Gripper'
+        sliderX: .63
+        sliderY: .6
+        valueX: .93
+        sliderSizeX: .37
+        min: app.commands['GRIPPER2']['MIN']
+        max: app.commands['GRIPPER2']['MAX']
+        val: app.commands['GRIPPER2']['VAL']
+        step: app.commands['GRIPPER2']['STEP']
+
+    SliderNV:
+        id: elbow2
+        name: 'Right Elbow'
+        sliderX: .63
+        sliderY: .4
+        valueX: .93
+        sliderSizeX: .37
+        min: app.commands['ELBOW2']['MIN']
+        max: app.commands['ELBOW2']['MAX']
+        val: app.commands['ELBOW2']['VAL']
+        step: app.commands['ELBOW2']['STEP']
+
+    SliderNV:
+        id: shoulder2
+        name: 'Right Shoulder'
+        sliderX: .63
+        sliderY: .2
+        valueX: .93
+        sliderSizeX: .37
+        min: app.commands['SHOULDER2']['MIN']
+        max: app.commands['SHOULDER2']['MAX']
+        val: app.commands['SHOULDER2']['VAL']
+        step: app.commands['SHOULDER2']['STEP']

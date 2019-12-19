@@ -1,0 +1,61 @@
+#:kivy 1.0
+#: include templates.kv
+#: include settings.kv
+#: import Joystick kivy.garden.joystick.Joystick
+
+<Container>:
+	FloatLayout:
+		id: mainScreen
+		disabled: False if root.ids.mode.text == 'Manual' and app.connected or root.ids.settingsLayout.ids.modes.ids.second.state == 'normal' else True
+		
+	SettingsLayout:
+		id: settingsLayout
+
+	SensorsLayout:
+		id: sensorsLayout
+
+	StatusLayout:
+		id: statusLayout
+
+	BoxLayout:
+		size_hint: (1, .2)
+		pos_hint: {'y': .8}
+		SensorsButton:
+			id: sensors
+			text: 'Sensors'
+			on_release: self.showSensors(root.ids.sensorsLayout, self.state)
+
+		Status:
+			id: status
+			on_release: self.mode()
+			orientation: 'vertical'
+			size_hint: (1, .6)
+			pos_hint: {'center_y': .5}
+			MyLabel:
+				id: statusLabel
+				text:  'Connected' if app.connected else 'Disconnected'
+				halign: 'center'
+				size_hint_x: 1
+
+			MyLabel:
+				id: mode
+				text: 'Waiting'
+				halign: 'center'
+				size_hint_x: 1
+
+
+		SettingsButton:
+			id: settings
+			text: 'Settings'
+			group: 'settings'
+			main: root.ids.mainScreen
+			layout: root.ids.settingsLayout
+			on_release: self.changeScreen()
+
+	Label:
+		id: notification
+		text: ''
+		size_hint: 1, None
+		pos_hint: {'top':.8}
+		height: self.texture_size[1]
+		halign: 'center'

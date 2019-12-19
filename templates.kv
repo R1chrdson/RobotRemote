@@ -1,0 +1,252 @@
+<MyLabel@Label>:
+	size_hint: (.5, .2)
+	bold: True
+	text_size: self.size
+	halign: 'left'
+	valign: 'center'
+
+<MySlider@Slider>:
+	cursor_image: 'cursor.png'
+	cursor_disabled_image: 'cursor_disabled.png'
+	cursor_size: (sp(50), sp(50))
+	background_width: 60
+
+<SliderNV@FloatLayout>:
+	name: ''
+	nameX: root.sliderX + .05
+	valueX: 0
+	value: slider.value
+	min: 0
+	max: 0
+	step: 0
+	val: 0
+	sliderX: 0
+	sliderY: 0
+	sliderSizeX: .5
+	sliderSizeY: .2
+
+	MyLabel:
+		id: nameLabel
+		text: root.name
+		pos_hint: {'x': root.nameX, 'center_y': root.sliderY + .1}
+
+	MyLabel:
+		id: valueLabel
+		text: str(int(round(root.value, 1)))
+		pos_hint: {'x': root.valueX, 'center_y': root.sliderY + .1}
+		size_hint: (.1, .2)
+
+	MySlider:
+		id: slider
+		size_hint: (root.sliderSizeX, root.sliderSizeY)
+		pos_hint: {'x': root.sliderX, 'center_y': root.sliderY}
+		min: root.min
+		max: root.max
+		step: root.step
+		value: root.val
+
+<MyJoystick>:
+	posX: 0
+	posY: 0
+	xText: ''
+	yText: ''
+	xValue: str(round((self.min+self.max)/2))
+	yValue: '0'
+	multMin: 0
+	multMax: 5
+	multStep: 1
+	multDefault: 1
+	angle: True
+	min: 60
+	max: 120
+	velocitymax: 255
+
+	SliderNV:
+        id: multiply
+        name: 'Multiply'
+        valueX: root.posX + .34
+		sliderY: root.posY - .35 
+        sliderX: root.posX + .1
+		nameX: root.posX + .13
+        sliderSizeX: .3
+        sliderSizeY: .2
+        min: root.multMin
+        max: root.multMax
+        step: root.multStep
+        val: root.multDefault
+
+	MyLabel:
+		id: xValue
+		text: root.xValue
+		pos_hint: {'x': root.posX + .13, 'center_y': root.posY + .21}
+
+	MyLabel:
+		id: yValue
+		text: root.yValue
+		pos_hint: {'x': root.posX + .34, 'center_y': root.posY + .21 if root.angle else root.posY + .25}
+	
+	MyLabel:
+		id: x
+		text: root.xText
+		pos_hint: {'x': root.posX + .13, 'center_y': root.posY + .25}
+
+	MyLabel:
+		id: y
+		text: root.yText
+		pos_hint: {'x': root.posX + .34  if root.angle else root.posX + .13, 'center_y': root.posY  + .25}
+
+	Joystick:
+		id: joypad
+		size_hint: (.5, .5)
+		pos_hint: {'x': root.posX,'center_y': root.posY}
+		sticky: False
+		outer_size: .5
+		inner_size: .25
+		pad_size:   0.51
+		outer_line_width: 0.01
+		inner_line_width: 0.01
+		pad_line_width:   0.01
+		outer_background_color: (0.75, 0.75, 0.75, 1)
+		outer_line_color:       (0.25, 0.25, 0.25, 1)
+		inner_background_color: (0.5,  0.5,  0.5,  1)
+		inner_line_color:       (0.7,  0.7,  0.7,  1)
+		pad_background_color:   (0.3,  0.3,  0.3,  1)
+		pad_line_color:         (0.4,  0.4,  0.4,  1)
+
+<MyInput>:
+	variable: ''
+	posX: 0
+	posY: 0
+	inputHeight: .15
+	orientation: 'vertical'
+	default: ''
+	section: ''
+
+	MyLabel:
+		text: str(root.variable).capitalize()
+		pos_hint: {'x': root.posX + .025, 'y': root.posY + root.inputHeight/5}
+
+	TextInput:
+		id: textInput
+		text: root.default
+		size_hint: (.8, root.inputHeight)
+		multiline: False
+		font_size: sp(21)
+		pos_hint: {'x': root.posX, 'y': root.posY - root.inputHeight}
+		on_text_validate: root.setVariable(self.text, root.variable)
+
+<Choose>:
+	firstText: ''
+	secondText: ''
+	group: ''
+	function: None
+	sizeX: .5
+	firstRefer: None
+	secondRefer: None
+	firstRelease: None
+	secondRelease: None
+ 
+	ToggleButton:
+		id: first
+		text: root.firstText
+		group: root.group
+		state: 'down'
+		allow_no_selection: False
+		size_hint_x: root.sizeX
+		on_state: root.function(self.state, root.firstRefer) if root.function else None
+		on_release: root.firstRelease() if root.firstRelease else None
+
+	ToggleButton:
+		id: second
+		text: root.secondText
+		group: root.group
+		allow_no_selection: False
+		size_hint_x: root.sizeX
+		on_state: root.function(self.state, root.secondRefer) if root.function else None
+		on_release: root.secondRelease() if root.secondRelease else None
+
+<MyScroll@ScrollView>:
+	scroll_timeout: 0
+
+<MyDropDown@DropDown>:
+	canvas.before:
+		Color:
+			rgba: 0, 0, 0, 1
+		Rectangle:
+			pos: self.pos
+			size: self.size
+
+<SensorsLayout>:
+	canvas.before:
+		Color:
+			rgba: 0, 0, 0, .8
+		Rectangle:
+			pos: self.pos
+			size: self.size
+	size_hint: (1, .8)
+	pos_hint: {'top': 4}
+	FloatLayout:
+		BoxLayout:
+			pos_hint: {'center_x': .5}
+			size_hint: (.3, 1)
+			orientation: 'vertical'
+
+<SensorsData>:
+
+	MyLabel:
+		size_hint: (.3, .3)
+		pos_hint: {'center_x': root.posNameX, 'center_y': .5}
+		text: str(root.name).capitalize()
+
+	MyLabel:
+		size_hint: (.3, .3)
+		pos_hint: {'center_x': root.posDataX, 'center_y': .5}
+		text: root.data
+		halign: 'right'
+
+<StatusLayout>:
+	canvas.before:
+		Color:
+			rgba: 0, 0, 0, .8
+		Rectangle:
+			pos: self.pos
+			size: self.size
+	size_hint_y: 0
+	FloatLayout:
+		Button:
+			id: button
+			pos_hint: {'center_x': .5, 'top': .9}
+			size_hint: (.3, .2)
+			text: 'Connect'
+			on_release: app.connect()
+		FloatLayout:
+			id: modes
+			pos_hint: {'center_x': .5, 'top': 1}
+			ToggleButton:
+				allow_no_selection: False
+				pos_hint: {'center_x': .2, 'top': .5}
+				size_hint: (.2, .2)
+				state: 'down'
+				text: 'Waiting'
+				group: 'mode'
+
+			ToggleButton:
+				allow_no_selection: False
+				pos_hint: {'center_x': .4, 'top': .5}
+				size_hint: (.2, .2)
+				text: 'Manual'
+				group: 'mode'
+
+			ToggleButton:
+				allow_no_selection: False
+				pos_hint: {'center_x': .6, 'top': .5}
+				size_hint: (.2, .2)
+				text: 'Line following'
+				group: 'mode'
+
+			ToggleButton:
+				allow_no_selection: False
+				pos_hint: {'center_x': .8, 'top': .5}
+				size_hint: (.2, .2)
+				text: 'Obstacle avoid'
+				group: 'mode'

@@ -1,0 +1,187 @@
+#: import partial functools.partial
+#:import Factory kivy.factory.Factory
+
+<SettingsButton>:
+    main: None
+    layout: None
+    
+
+<SettingsLayout>:
+    canvas.before:
+        Color:
+            rgba: 0, 0, 0, .8
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    do_scroll_y: True
+    do_scroll_x: False
+    size_hint_y: 0
+    pos_hint: {'top':.75}
+    FloatLayout:
+        BoxLayout:
+            pos_hint: {'top':1}
+            size_hint_y: .2
+            Choose:
+                id: setting
+                firstText: 'Connection'
+                secondText: 'Controls'
+                firstRefer: root.ids.connectionSetting
+                secondRefer: root.ids.controlsSetting
+                group: 'setting'
+                function: partial(self.changeSettings)
+
+        MyScroll:
+            id: connectionSetting
+            size_hint: 1, .8
+            FloatLayout:
+                Choose:
+                    id: method
+                    firstText: 'TCP'
+                    secondText: 'Bluetooth'
+                    group: 'method'
+                    firstRefer: root.ids.tcpSetting
+                    secondRefer: root.ids.bluetoothSetting
+                    secondRelease: partial(root.bluetoothDevices)
+                    size_hint: (.5, .2)
+                    pos_hint: {'center_x':.5,'top':1}
+                    function: partial(self.changeSettings)
+
+                MyScroll:
+                    id: tcpSetting
+                    size_hint: 1, .8
+                    pos_hint: {'top':.8}
+                    FloatLayout:
+                        MyInput:
+                            id: host
+                            posX: .1
+                            posY: .8
+                            variable: 'host'
+                            default: app.host
+
+                        MyInput:
+                            id: port
+                            posX: .1
+                            posY: .45
+                            variable: 'port'
+                            default: app.port
+
+                MyScroll:
+                    id: bluetoothSetting
+                    size_hint: (1, 0)
+                    FloatLayout:
+                        Label:
+                            text: 'Choose device'
+                            size_hint: (1, .1)
+                            pos_hint: {'center_x': .5 ,'top': 1}
+                        MyScroll:
+                            id: deviceList
+                            size_hint: (1, .8)
+                            pos_hint: {'top': .9}
+                            BoxLayout:
+                                size_hint: (1, None)
+                                orientation: 'vertical'
+
+        MyScroll:
+            id: controlsSetting
+            size_hint: (1, 0)
+            FloatLayout:
+                orientation: 'vertical'
+                Choose:
+                    firstText: 'Elements'
+                    secondText: 'Commands'
+                    firstRefer: root.ids.elementsSetting
+                    secondRefer: root.ids.commandsSetting
+                    group: 'controls'
+                    size_hint: (.5, .2)
+                    pos_hint: {'center_x':.5,'top':1}
+                    function: partial(self.changeSettings)
+
+                MyScroll:
+                    id: elementsSetting
+                    size_hint: (1, .8)
+                    FloatLayout:
+                        BoxLayout:
+                            orientation: 'horizontal'
+                            pos_hint: {'center_y': .6}
+                            size_hint_y: .5
+                            BoxLayout:
+                                orientation: 'vertical'
+                                size_hint_y: 1
+                                pos_hint: {'center_x': .5, 'center_y': .5}
+                                MyLabel:
+                                    text: 'Arms'
+                                    halign: 'center'  
+                                    size_hint_x: 1
+                                Choose:
+                                    id: arms
+                                    firstText: 'One arm'
+                                    secondText: 'Two arms'
+                                    group: 'arms'
+                                    size_hint: (.8, .3)
+                                    pos_hint: {'center_x': .5}
+                                    firstRefer: 1
+                                    secondRefer: 2
+                                
+                            BoxLayout:
+                                orientation: 'vertical'
+                                size_hint_y: 1
+                                pos_hint: {'center_x': .5, 'center_y': .5}
+                                MyLabel:
+                                    text: 'Engines'
+                                    halign: 'center'
+                                    size_hint_x: 1
+                                Choose:
+                                    id: engines
+                                    firstText: 'One engine'
+                                    secondText: 'Two engines'
+                                    group: 'engines'
+                                    size_hint: (.8, .3)
+                                    pos_hint: {'center_x': .5}
+                                    firstRefer: 1
+                                    secondRefer: 2
+
+                            BoxLayout:
+                                orientation: 'vertical'
+                                size_hint_y: 1
+                                pos_hint: {'center_x': .5, 'center_y': .5}
+                                MyLabel:
+                                    text: 'Modes'
+                                    halign: 'center'
+                                    size_hint_x: 1
+                                Choose:
+                                    id: modes
+                                    firstText: 'Off'
+                                    secondText: 'On'
+                                    group: 'modes'
+                                    size_hint: (.8, .3)
+                                    pos_hint: {'center_x': .5}
+                                    firstRefer: 'off'
+                                    secondRefer: 'on'
+                                    function: partial(self.switchMode)
+
+                FloatLayout:
+                    id: commandsSetting
+                    size_hint: (1, 0)
+                    pos_hint: {'top': 2}
+                    SettingsSpinner:
+                        id: option
+                        dropdown_cls: Factory.MyDropDown
+                        size_hint: (.25, .25)
+                        pos_hint: {'x': 0, 'top': 1.25}
+                        text: 'Choose option'
+                        on_text: self.showSettings()
+
+                    Spinner:
+                    	dropdown_cls: Factory.MyDropDown
+                        id: action
+                        size_hint: (.25, .25)
+                        pos_hint: {'right': 1, 'top': 1.25}
+                        text: 'Choose action'
+                        values: ('Save', 'Default', 'Load')
+                        on_text: root.commandsAction(self.text)
+
+                    ScrollView:
+                        id: content
+                        BoxLayout:
+                            ScrollView:
