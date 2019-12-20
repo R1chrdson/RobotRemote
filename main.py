@@ -28,6 +28,7 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.togglebutton import ToggleButton
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.behaviors import ButtonBehavior
+from kivy.uix.filechooser import FileChooserListView
 from kivy.logger import Logger
 from kivy.clock import Clock
 from kivy.lang import Builder
@@ -443,7 +444,7 @@ class RemoteApp(App):
                 self.tcpSocket.connect((self.host, int(self.port)))
                 self.tcpSocket.send([100])
             else:
-                for device in self.root.ids.settingsLayout.ids.deviceList.children:
+                for device in self.root.ids.settingsLayout.ids.deviceList.children[0].children:
                     if device.state == 'down':
                         objectDevice = device
                 paired_devices = BluetoothAdapter.getDefaultAdapter().getBondedDevices().toArray()

@@ -88,10 +88,10 @@ android.presplash_color = #000000
 android.permissions = INTERNET, BLUETOOTH, BLUETOOTH_ADMIN, WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE
 
 # (int) Target Android API, should be as high as possible.
-#android.api = 27
+android.api = 28
 
 # (int) Minimum API your APK will support.
-#android.minapi = 21
+#android.minapi = 28
 
 # (int) Android SDK version to use
 #android.sdk = 20
@@ -106,10 +106,10 @@ android.permissions = INTERNET, BLUETOOTH, BLUETOOTH_ADMIN, WRITE_EXTERNAL_STORA
 #android.private_storage = True
 
 # (str) Android NDK directory (if empty, it will be automatically downloaded.)
-android.ndk_path = /home/r1chardson/.buildozer/android/platform/android-ndk-r17c
+#android.ndk_path = /home/r1chardson/.buildozer/android/platform/android-ndk-r17c
 
 # (str) Android SDK directory (if empty, it will be automatically downloaded.)
-android.sdk_path = /home/r1chardson/.buildozer/android/platform/android-sdk
+#android.sdk_path = /home/r1chardson/.buildozer/android/platform/android-sdk
 
 # (str) ANT directory (if empty, it will be automatically downloaded.)
 #android.ant_path =
@@ -198,7 +198,7 @@ android.sdk_path = /home/r1chardson/.buildozer/android/platform/android-sdk
 #android.copy_libs = 1
 
 # (str) The Android arch to build for, choices: armeabi-v7a, arm64-v8a, x86
-android.arch = armeabi-v7a
+android.arch = arm64-v8a
 
 #
 # Python for android (p4a) specific
